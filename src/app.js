@@ -10,11 +10,11 @@ const app = express();
 dotenv.config();
 
 const store = new MongoDbStore({
-  uri: process.env.DATABASE_URI,
+  uri: process.env.MONGODB_URI,
   collection: 'session'
 })
 
-mongoose.connect(process.env.DATABASE_URI || 'mongodb://localhost:27017/todostask');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/todostask');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
