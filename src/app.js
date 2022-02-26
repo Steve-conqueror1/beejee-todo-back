@@ -14,7 +14,7 @@ const store = new MongoDbStore({
   collection: 'session'
 })
 
-mongoose.connect(process.env.DATABASE_URI);
+mongoose.connect(process.env.DATABASE_URI || 'mongodb://localhost:27017/todostask');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -32,7 +32,7 @@ routes.forEach((item) => {
 });
 
 
-let PORT = process.env.PORT || 3000;
+let PORT = process.env.PORT || 5000;
 
 app.listen(PORT);
 console.log(`Server running at ${PORT}`);
