@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const session = require('express-session')
 const MongoDbStore = require('connect-mongodb-session')(session)
 const { routes } = require('./routes');
@@ -30,6 +31,13 @@ app.use(
 routes.forEach((item) => {
   app.use(`/api/v1/${item}`, require(`./routes/${item}`));
 });
+
+let corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions))
 
 
 let PORT = process.env.PORT || 5000;
