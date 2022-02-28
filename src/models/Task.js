@@ -9,7 +9,7 @@ const {
 const { CREATED } = require('../constants');
 
 const schema = new Schema({
-  text: { type: String, default: '' },
+  text: { type: String, required: [true, 'This field is required'] },
   status: { type: Array, default: [CREATED] },
   createdBy: {
     type: ObjectId,
