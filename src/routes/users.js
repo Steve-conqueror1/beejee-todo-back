@@ -6,6 +6,6 @@ router.route('/:id').get(user.get);
 router.route('/').get(user.getAll);
 router.route('/').post(user.create);
 router.route('/login').post(user.login);
-router.route('/logout').post(user.login);
+router.route('/logout').post(user.logout);
 
 module.exports = router;

@@ -48,44 +48,6 @@ const genericApi = (model) => ({
       return res.status(400).send(boom.boomify(err));
     }
   },
-
-  async login(req, res) {
-    const { username, password } = req.body;
-    try {
-      const user = await model.findOne({username})
-
-      if(!user){
-        return res.status(404).send({username: "No user associated with this username"})
-      }
-
-      if(user.username !== username){
-        return res.status(409).send({username: "No user associated with this username"})
-      }
-
-      if(user.password !== password){
-       return  res.status(409).send({password: "Wrong password"})
-      }
-      req.session.userType = user.userType
-
-      req.session.save( error => {
-        if(!error){
-           return res.status(200).send({login: "Successfully logged in"});
-        }
-      })
-    } catch (err) {
-      return res.status(400).send(boom.boomify(err));
-    }
-  },
-
-  async logout(req, res) {
-    req.session.destroy(err => {
-        if(err){
-            console.log(err);
-        } else {
-            res.send('Successfully logged out')
-        }
-    });
-  },
 });
 
 module.exports = genericApi;

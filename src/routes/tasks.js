@@ -1,10 +1,16 @@
 const router = require('express-promise-router')();
 
 const { task } = require('../controllers');
+const checkAuth = require('./../middleware/checkAuth')
+const checkPermission = require('./../middleware/checkPermission')
 
 router.route('/:id').get(task.get);
-router.route('/').post(task.create);
 router.route('/').get(task.getAll);
+
+router.use(checkAuth)
+router.route('/').post(task.create);
+
+router.use(checkPermission)
 router.route('/:id').put(task.update);
 
 module.exports = router;
