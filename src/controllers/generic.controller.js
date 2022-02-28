@@ -15,7 +15,7 @@ const genericApi = (model) => ({
   async getAll(req, res) {
     try {
       const items = await model.find();
-      return res.json(items).status(200).end();
+      return res.status(200).send(items)
     } catch (err) {
       return res.status(400).send(boom.boomify(err));
     }
