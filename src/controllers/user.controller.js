@@ -18,7 +18,7 @@ module.exports = {
       const item = new User({email, username, userType, password: passwordHash});
       const createdUser = await item.save();
       const token = await jwt.sign({userId: createdUser.id, userType: createdUser.userType }, process.env.SECRET_KEY, {expiresIn: '120s'})
-      return res.status(201).json({userId: createdUser.id, email: createdUser.email, userType: createdUser.userType, token});
+      return res.status(201).json({userId: createdUser.id, email: createdUser.email, username: createdUser.username, userType: createdUser.userType, token});
     } catch (err) {
       return res.status(400).send(boom.boomify(err));
     }
@@ -43,7 +43,7 @@ module.exports = {
       }
 
       const token = await jwt.sign({userId: existingUser.id, userType: existingUser.userType }, process.env.SECRET_KEY, {expiresIn: '120s'})
-      return res.status(200).json({userId: existingUser.id, email: existingUser.email, userType: existingUser.userType, token});
+      return res.status(200).json({userId: existingUser.id, email: existingUser.email, userType: existingUser.userType, username: existingUser.username, token});
     } catch (err) {
       return res.status(400).send(boom.boomify(err));
     }
