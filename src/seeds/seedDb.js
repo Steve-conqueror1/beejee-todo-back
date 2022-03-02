@@ -6,7 +6,7 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
     if (err) {
         throw err
     }
-    const user = { username: 'admin', password: '123', userType: 'admin', email: "admin@gmail.com"}
+    const user = { username: 'admin', password: '$2a$12$m5A3gfJiiUvRafIe5yNwc./qhVS/KoIi/SIHaosUqaiaNrwPyMkGO', userType: 'admin', email: "admin@gmail.com"}
     const dbinstance = client.db(process.env.MONGODATABASENAME);
     dbinstance.collection('users').insertOne(user).then((result) => {
         console.log("Successifully inserted...")
