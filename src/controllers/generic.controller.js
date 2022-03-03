@@ -36,12 +36,6 @@ const genericApi = (model) => ({
     const { id } = req.params;
     const body = req.body;
     try {
-      if(!req.session.userType){
-         return res.status(401).send({unauthorized: "You need to login to perform this action"});
-      }
-      if(!req.session.userType !== ADMIN_USER_TYPE){
-         return res.status(403).send({unauthorized: "You dont have permission to perform this action"});
-      }
       const item = await model.findByIdAndUpdate(id, body, { new: true });
       return res.status(200).send(item);
     } catch (err) {
