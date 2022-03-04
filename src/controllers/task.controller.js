@@ -7,9 +7,15 @@ module.exports = {
     const limit = req.query.limit || 3
       const pageNumber = req.query.page || 1
       const count = await Task.countDocuments()
+      const sort ={}
+      if(req.query.sortBy && req.query.OrderBy){
+        sort[req.query.sortBy] = req.query.OrderBy === 'desc'? -1 :1
+      }
+
 
     try {
       const data =await Task.find()
+          .sort({...sort})
           .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * limit ) : 0 )
           .limit(limit)
           .populate('createdBy', ['email', 'username'])
