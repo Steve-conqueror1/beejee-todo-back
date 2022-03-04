@@ -1,9 +1,6 @@
 const {
   model,
   Schema,
-  Schema: {
-    Types: { ObjectId },
-  },
 } = require('mongoose');
 
 const { NORMAL_USER_TYPE } = require('../constants');
@@ -17,12 +14,6 @@ const schema = new Schema({
     default: NORMAL_USER_TYPE,
     required: [true, 'This field is already required'],
   },
-  tasks: [
-    {
-      type: ObjectId,
-      ref: 'Task',
-    },
-  ],
 });
 
 module.exports = model('User', schema);

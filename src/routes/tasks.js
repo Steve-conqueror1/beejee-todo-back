@@ -6,8 +6,6 @@ const checkPermission = require('./../middleware/checkPermission')
 
 router.route('/:id').get(task.get);
 router.route('/').get(task.getAll);
-
-router.use(checkAuth)
 router.route('/').post(task.create);
 
 router.use(checkPermission)

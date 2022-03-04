@@ -8,17 +8,16 @@ module.exports = {
       const pageNumber = req.query.page || 1
       const count = await Task.countDocuments()
       const sort ={}
+      let options = {}
       if(req.query.sortBy && req.query.OrderBy){
-        sort[req.query.sortBy] = req.query.OrderBy === 'desc'? -1 :1
+        sort[req.query.sortBy] = req.query.OrderBy === 'desc'? -1 :1.
+        options = {sort: [[req.query.sortBy, req.query.OrderBy]]}
       }
-
-
     try {
       const data =await Task.find()
           .sort({...sort})
           .skip( pageNumber > 0 ? ( ( pageNumber - 1 ) * limit ) : 0 )
           .limit(limit)
-          .populate('createdBy', ['email', 'username'])
           .then(items => {
             return items;
       })
