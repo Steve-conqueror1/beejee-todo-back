@@ -42,14 +42,10 @@ module.exports = {
        return  res.status(409).send({password: "Wrong password"})
       }
 
-      const token = await jwt.sign({userId: existingUser.id, userType: existingUser.userType }, process.env.SECRET_KEY, {expiresIn: '120s'})
+      const token = await jwt.sign({userId: existingUser.id, userType: existingUser.userType }, process.env.SECRET_KEY, {expiresIn: '1200s'})
       return res.status(200).json({userId: existingUser.id, email: existingUser.email, userType: existingUser.userType, username: existingUser.username, token});
     } catch (err) {
       return res.status(400).send(boom.boomify(err));
     }
   },
-
-  async logout(req, res) {
-    return res.send('Successfully logged out')
-  }
 };

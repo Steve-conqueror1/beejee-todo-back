@@ -10,6 +10,8 @@ const schema = new Schema({
   status: { type: Array, default: [CREATED] },
   email: { type: String,  unique:true, required: true },
   username: { type: String, unique:  true , required: true },
+  isCompleted: {type: Boolean, required: true, default: false },
+  editedByAdmin: {type: Boolean, required: true, default: false }
 });
 
 module.exports = model('Task', schema);
