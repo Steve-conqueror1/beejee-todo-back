@@ -1,5 +1,4 @@
 const boom = require('boom');
-const {ADMIN_USER_TYPE} = require("../constants");
 
 const genericApi = (model) => ({
   async get(req, res) {
@@ -8,7 +7,7 @@ const genericApi = (model) => ({
       const item = await model.findById(id);
       return res.status(200).send(item);
     } catch (err) {
-      return res.status(400).send(boom.boomify(err));
+      return res.status(400).send({error: err});
     }
   },
 
@@ -17,7 +16,7 @@ const genericApi = (model) => ({
       const items = await model.find();
       return res.status(200).send(items)
     } catch (err) {
-      return res.status(400).send(boom.boomify(err));
+      return res.status(400).send({error: err});
     }
   },
 
@@ -28,7 +27,7 @@ const genericApi = (model) => ({
       const newItem = await item.save();
       return res.status(201).send(newItem);
     } catch (err) {
-      return res.status(400).send(boom.boomify(err));
+      return res.status(400).send({error: err});
     }
   },
 
@@ -39,7 +38,7 @@ const genericApi = (model) => ({
       const item = await model.findByIdAndUpdate(id, body, { new: true });
       return res.status(200).send(item);
     } catch (err) {
-      return res.status(400).send(boom.boomify(err));
+      return res.status(400).send({error: err});
     }
   },
 });

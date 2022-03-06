@@ -1,3 +1,3 @@
 module.exports = {
-  routes: ['tasks', 'users'],
+  routes: ['tasks', 'users', 'logout'],
 };
